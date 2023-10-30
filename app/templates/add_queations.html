@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block main %} 
+<div class="container mt-4" style="    display: flex;justify-content: space-between;">
+     
+    <div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Add Queation
+          </button> 
+    </div>
+    <div>
+        <a href="{% url 'logout_user' %}" class="btn btn-danger">Logout</a> 
+    </div>
+ 
+</div>
+<hr>
+<div class="container mt-4">
+    <div class="container ">
+        <div class="row justify-content-start">
+          <div class="col-8">
+            {% for queation in queations %}
+                <div class="card">
+                    <div class="card-body">
+                            <h4>{{ queation.title }}</h4>
+                            <input type="number" hidden value="{{queations.id}}" name="queations_id">
+                            <h5>
+                                {% for option in queation.quiz_options.all %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="selected_option" id="option{{ option.id }}" value="{{ option.id }}" disabled>
+                                    <label class="form-check-label" for="option{{ option.id }}">
+                                        {{ option.option }}
+                                    </label>
+                                </div>   
+                                {% endfor %}
+                            </h5> 
+                    </div>
+                </div>
+                <hr>
+                <br>
+            {% endfor %}
+        </div>
+    </div>
+    
+ 
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="" method="post" style="width: 50%; ">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">queation Name</label>
+                    <input type="text" class="form-control" name="queation" id="exampleFormControlInput1" placeholder=" " required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">option 1</label>
+                    <input type="text" class="form-control" name="option1" id="exampleFormControlInput1" placeholder=" " required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">option 2</label>
+                    <input type="text" class="form-control" name="option2" id="exampleFormControlInput1" placeholder=" " required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">option 3</label>
+                    <input type="text" class="form-control" name="option3" id="exampleFormControlInput1" placeholder=" " required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">option 4</label>
+                    <input type="text" class="form-control" name="option4" id="exampleFormControlInput1" placeholder=" " required>
+                </div>
+               
+                <input type="submit" value="Add" class="btn btn-danger">
+            </form> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block main %} 
+<div class="container mt-4">
+    <div class="container ">
+        <div class="row justify-content-start">
+          <div class="col-8">
+            {% for queation in queations %}
+                <div class="card">
+                    <div class="card-body">
+                            <h4>{{ queation.title }}</h4>
+                            <input type="number" hidden value="{{queations.id}}" name="queations_id">
+                            <h5>
+                                {% for option in queation.quiz_options.all %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="selected_option" id="option{{ option.id }}" value="{{ option.id }}" disabled>
+                                    <label class="form-check-label" for="option{{ option.id }}">
+                                        {{ option.option }}
+                                    </label>
+                                </div>   
+                                {% endfor %}
+                            </h5> 
+                    </div>
+                </div>
+                <hr>
+                <br>
+            {% endfor %}
+          </div>
+          <div class="col-4">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for candi in candidates %}
+                    <tr>
+                      <th scope="row">{{ forloop.counter }}</th>
+                      <td>{{candi.first_name}}</td>
+                      <td>{{candi.last_name}}</td>
+                      <td>{{candi.email}}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+          </div>
+        </div>
+    </div>
+    
+ 
+</div>
+
+{% endblock %}

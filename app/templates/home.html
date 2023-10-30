@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block main %} 
+<div class="container mt-4" style="    display: flex;justify-content: space-between;">
+     
+    <div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Create Quiz
+          </button> 
+    </div>
+    <div>
+        <a href="{% url 'logout_user' %}" class="btn btn-danger">Logout</a> 
+    </div>
+ 
+</div>
+<hr>
+<div class="container mt-2" style="display: flex;
+justify-content: space-between;
+flex-wrap: wrap;">
+
+    {% for quiz in user_quiz %}
+        <div class="card mt-1" style="width: 18rem;">
+            <div class="card-body">
+            <h5 class="card-title">{{quiz.name}}</h5>
+            <p class="card-text">Total Queations: {{quiz.number_of_queation}}</p>
+            <p class="card-text">Link for public: <a href="/{{quiz.quiz_id}}/{{quiz.first_queation}}/">http://127.0.0.1:8000/{{quiz.quiz_id}}/{{quiz.first_queation}}/</a></p>
+            <a href="{% url 'quiz_details' quiz.quiz_id %}" class="btn btn-primary">See deatils</a>
+            </div>
+        </div>     
+    {% endfor %}
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="" method="post" style="width: 50%; ">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Quiz Name</label>
+                    <input type="text" class="form-control" name="quiz_name" id="exampleFormControlInput1" placeholder=" " required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Total Queation</label>
+                    <input type="number" class="form-control" name="queation_number" id="exampleFormControlInput1" placeholder=" " required>
+                </div>
+               
+                <input type="submit" value="Add" class="btn btn-danger">
+            </form> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

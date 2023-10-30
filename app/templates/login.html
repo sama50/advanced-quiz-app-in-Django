@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block main %} 
+<div class="container mt-4" style="display: flex; justify-content: center; ">
+    <form action="" method="post" style="width: 50%; ">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Username</label>
+            <input type="text" class="form-control" name="username" id="exampleFormControlInput1" placeholder="sama.." required>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" id="exampleFormControlInput1" placeholder="pass@123.." required>
+        </div>
+        <input type="submit" value="Login" class="btn btn-danger">
+    </form>
+     
+    
+ 
+</div>
+
+{% endblock %}

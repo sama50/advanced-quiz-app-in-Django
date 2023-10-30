@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block main %} 
+<div class="container mt-4 d-flex center">
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">  
+    
+                
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <h5 class="card-title">1</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            
+                                    <h4>{{ queations.title }}</h4>
+                                    <input type="number" hidden value="{{queations.id}}" name="queations_id">
+                                    <h5>
+                                        {% for option in queations.quiz_options.all %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="selected_option" id="option{{ option.id }}" value="{{ option.option }}">
+                                            <label class="form-check-label" for="option{{ option.id }}">
+                                                {{ option.option }}
+                                            </label>
+                                        </div>
+                                        
+                                            
+                                        {% endfor %}
+                                    </h5>
+                                
+                                <input type="submit"  class="btn btn-success mt-3" value="Next">
+                            </form>
+                        </div>
+                    </div>
+                    
+    
+            </div>
+        </div>
+    </div>
+    
+ 
+</div>
+
+{% endblock %}
